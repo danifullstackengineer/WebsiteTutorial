@@ -9,9 +9,9 @@ _Means the field below will be of the same type/structure as the @field_
 
 #### Example
 
-> address: string --- but it should be implemented as (Street, Flat number, Apartment number)
-> @same @paid
-> second_address: string
+> address: string --- but it should be implemented as (Street, Flat number, Apartment number)<br>
+> @same @paid<br>
+> second_address: string<br>
 > Then second_address should be of the same form (Street, Flat number, Apartment number)
 
 ### @readonly
@@ -24,8 +24,8 @@ _Means that in order for the field bellow to have @result value, the \_field mus
 
 #### Example
 
-> paid: boolean (assume is true);
-> @requires _paid @true @true
-> dispatched: boolean;
+> paid: boolean (assume is true);<br>
+> @requires _paid @true @true<br>
+> dispatched: boolean;<br>
 > Then dispatched will ONLY be true when paid is true.<br>
 > But if paid is true, this does not imply that dispatched is also true.
