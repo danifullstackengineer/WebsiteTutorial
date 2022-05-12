@@ -1,7 +1,7 @@
 // The type definition of a product.
 interface IPayment {
-  id: string;
   // the type of payment used
+  /** @readonly */
   name:
     | "PAYPAL"
     | "STRIPE"
@@ -13,11 +13,15 @@ interface IPayment {
 
 // type definition for payments made via fiat
 interface IPaymentFiat extends IPayment {
+  // the fiat coin type used for the payment
+  /** @readonly */
   coins: "USD" | "EUR" | "CAD" | "JPY" | "CNY" | "GBP" | "KRW" | "AUD";
 }
 
 // type definition for payments made via cryptocurrency
 interface IPaymentCrypto extends IPayment {
+  // the crypto coin type used for the payment
+  /** @readonly */
   coins: "BTC" | "ETH" | "LTC" | "DOGE";
 }
 

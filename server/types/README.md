@@ -1,4 +1,4 @@
-**_JSDoc is only for visualization purposes._**
+**_JSDoc is only for better understanding of code._**
 **_It does not actually work._**
 
 ## Notation:
@@ -16,7 +16,7 @@ _Means the field below will be of the same type/structure as the @field_
 
 ### @readonly
 
-_Means the field is not to be changed_
+_Means the field is not to be changed after it's assignment_
 
 ### @requires \_field @value @result
 
@@ -25,7 +25,34 @@ _Means that in order for the field bellow to have @result value, the \_field mus
 #### Example
 
 > paid: boolean (assume is true);<br>
-> @requires _paid @true @true<br>
+> @requires \_paid @true @true<br>
 > dispatched: boolean;<br>
 > Then dispatched will ONLY be true when paid is true.<br>
 > But if paid is true, this does not imply that dispatched is also true.
+
+### @noclient
+
+_Means that the object should NOT be passed to the client in under any circumstance._
+
+#### Example
+
+> @noclient<br>
+> password: string
+> Do NOT send this object over to the client. Only keep it on the server side.
+
+### @defaults @value
+
+_Means that the object will have this value at initialization unless otherwise modified_
+
+#### Example
+
+> @default @false<br>
+> verified: boolean<br>
+> If no value for verified was provided, verified should be initialized as false.<br>
+> Else it should be initialized as the value provided.
+
+
+##### Custom types
+> @new_Date => new Date() <br>
+> @false => false <br>
+> @[] => [] <br>

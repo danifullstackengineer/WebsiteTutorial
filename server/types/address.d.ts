@@ -23,4 +23,4 @@ interface IDeliveryAddress extends IAddress {
     second_phone_number: string;
 }
 
-export {IDeliveryAddress, IAddress}
+export {IDeliveryAddress, IAddress};
