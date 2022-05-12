@@ -1,0 +1,16 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run-client": "cd client && npm start && cd ..",
+    "run-server": "cd server && npm start && cd ..",
+    "startdev": "concurrently \"npm run run-client\" \"npm run run-server-dev\""
+  },
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
