@@ -2,7 +2,7 @@
 
 import { IAddress, IDeliveryAddress } from "./address";
 import { IPaymentCrypto, IPaymentFiat } from "./payment";
-import { IProductOrdered } from "./product";
+// import { IProductOrdered } from "./product";
 import {IUser} from "./user";
 
 interface IOrder {
@@ -22,7 +22,8 @@ interface IOrder {
   address: IAddress | IDeliveryAddress;
   // the products the user has ordered
   /** @readonly */
-  products: IProductOrdered[];
+  //TODO: Fix this
+  // products: IProductOrdered[];
   /** @readonly */
   // the payment method used by the user
   payment_method: IPaymentFiat | IPaymentCrypto;

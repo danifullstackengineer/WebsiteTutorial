@@ -1,6 +1,4 @@
-import mongoose, { Model, ObjectId, Document, model, Schema } from "mongoose";
-import { IUser } from "../../types/user";
-import { IReview } from "../../types/review";
+import mongoose from "mongoose";
 
 // The type definition of a product.
 interface IProduct {
@@ -16,12 +14,16 @@ interface IProduct {
   // the price of the product
   price: number;
   // an array of strings representing each review made by a particular user.
+  /** @default @[] */
   reviews: mongoose.Types.ObjectId[];
   // boolean value stating if product is currently in stock or not
+  /** @default @true */
   is_in_stock: boolean;
   // percentage value ranging from 0(no discount) up to 100(obviously not 100 in real life but it will be treated as such)
+  /** @default @0 */
   discount: number;
   // stating if the item was refurbished or not
+  /** @default @false */
   refurbished: boolean;
   // the type of sword
   /**
@@ -38,12 +40,13 @@ interface IProduct {
 }
 
 // Omit the _id field in the IProduct interface so it doesn't clash with Document type
-interface IProductDoc extends Omit<IProduct, "_id">, Document {}
+interface IProductDoc extends Omit<IProduct, "_id">, mongoose.Document {}
 
-const ProductSchemaFields: Record<keyof IProduct, any> = {
+export const ProductSchemaFields: Record<keyof IProduct, any> = {
   _id: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     readonly: true,
+    required: true
   },
   name: {
     type: String,
@@ -62,8 +65,9 @@ const ProductSchemaFields: Record<keyof IProduct, any> = {
   reviews: {
     type: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        readonly: true
       },
     ],
     default: [],
@@ -89,8 +93,9 @@ const ProductSchemaFields: Record<keyof IProduct, any> = {
     readonly: true,
   },
 };
-const ProductSchema = new Schema(ProductSchemaFields);
+const ProductSchema = new mongoose.Schema(ProductSchemaFields);
 
-const Product = model<IProductDoc>("Product", ProductSchema);
+// Creating product model
+const Product = mongoose.model<IProductDoc>("Product", ProductSchema);
 
 export { Product, IProduct };

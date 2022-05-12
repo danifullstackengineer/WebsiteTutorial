@@ -2,3 +2,5 @@ TODO: In product add the following types:
     - description
     - metal types
     - 
+TODO: Check and validate types for graphql queries,mutations and mongoose types/interfaces
+TODO: Handle errors in GraphQL

@@ -1,3 +1,6 @@
 # Prevent files from getting pushed to heroku. This will still push them to github as opposed to .gitignore, but they will not be present in the production build
 **/heroku_ignore
 ./server/routes/single_use
+./server/tets
+./server/jest.config.ts
+./server/babel.config.js
