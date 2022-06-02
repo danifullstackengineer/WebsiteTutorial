@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run-client": "cd client && npm start && cd ..",
-    "run-server": "cd server && npm start && cd ..",
-    "startdev": "concurrently \"npm run run-client\" \"npm run run-server-dev\""
+    "run-server-dev": "cd server && npm run startdev && cd ..",
+    "run-client": "cd client && npm run start && cd ..",
+    "run-server": "cd server && npm run start && cd ..",
+    "startdev": "concurrently --kill-others-on-fail \"npm run run-client\" \"npm run run-server-dev\""
   },
   "dependencies": {
     "concurrently": "^7.0.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-security": "^1.5.0"
+  }
 }

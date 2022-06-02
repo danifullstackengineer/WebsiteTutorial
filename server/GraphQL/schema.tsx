@@ -1,13 +1,14 @@
 // Imports required to set up our schema.
-import {GraphQLObjectType, GraphQLSchema, graphql} from 'graphql';
-import { createUser } from './mutations/User';
-import { getAllProducts } from './queries/Product';
+import { GraphQLObjectType, GraphQLSchema, graphql } from "graphql";
+import { createUser } from "./mutations/User";
+import { getAllProducts, getProductBasedOnType } from "./queries/Product";
 
 // Create the RootQuery
 const RootQuery = new GraphQLObjectType({
   name: "Queries",
   fields: {
-    getAllProducts: getAllProducts
+    getAllProducts: getAllProducts,
+    getProductsBasedOnType: getProductBasedOnType,
   },
 });
 
@@ -15,7 +16,7 @@ const RootQuery = new GraphQLObjectType({
 const RootMutation = new GraphQLObjectType({
   name: "Mutations",
   fields: {
-    createUser: createUser
+    createUser: createUser,
   },
 });
 

@@ -5,17 +5,18 @@ interface IProduct {
   // id from the database corresponding to the product
   // The ObjectId in the interface is different from the one on the schema side
   /** @readonly */
-  _id: mongoose.Types.ObjectId;
+  _id: Readonly<mongoose.Types.ObjectId>;
   // name of the product
   name: string;
   // the url pointing to the image for the product
-  /** @readonly */
-  image: string;
+  image: Readonly<string>;
   // the price of the product
   price: number;
   // an array of strings representing each review made by a particular user.
-  /** @default @[] */
-  reviews: mongoose.Types.ObjectId[];
+  /** @default @ {ids, value} */
+  /** @default @[] @arg*/
+  /** @default @0 @arg*/
+  reviews: { ids: mongoose.Types.ObjectId[]; value: number };
   // boolean value stating if product is currently in stock or not
   /** @default @true */
   is_in_stock: boolean;
@@ -26,31 +27,60 @@ interface IProduct {
   /** @default @false */
   refurbished: boolean;
   // the type of sword
-  /**
-   * @readonly
-   */
-  type_sword:
-    | "Broadsword"
-    | "Cutlass"
-    | "Katana"
-    | "Knife"
-    | "Longsword"
-    | "Rapier"
-    | "Wakizashi";
+  type_sword: Readonly<SwordType>;
+  // the description of the sword
+  description: string[];
+  // the type of the metal used in the sword
+  metal_type: Readonly<MetalType>;
+  // the overall length of the sword
+  total_length: Readonly<number>;
+  // the length of the blade
+  blade_length: Readonly<number>;
+  // the width of the blade
+  blade_width: Readonly<number>;
+  // the weight of the sword
+  sword_weight: Readonly<number>;
+  // the point of balance of the sword
+  point_of_balance: Readonly<number>;
+  // the edge of the sword
+  sword_edge: Readonly<SwordEdge>;
+  // if engraving is available
+  engraving: boolean;
+}
+
+export enum MetalType {
+  HIGH_CARBON_STEEL_1045,
+  HIGH_CARBON_STEEL_1060,
+  HIGH_CARBON_STEEL_1075,
+  HIGH_CARBON_STEEL_1095,
+  SPRING_STEEL,
+}
+export enum SwordEdge {
+  SHARPENED,
+  UNSHARPENED,
+}
+export enum SwordType {
+  BROADSWORD,
+  CUTLASS,
+  KATANA,
+  KNIFE,
+  LONGSWORD,
+  RAPIER,
+  WAKIZASHI,
 }
 
 // Omit the _id field in the IProduct interface so it doesn't clash with Document type
-interface IProductDoc extends Omit<IProduct, "_id">, mongoose.Document {}
+export interface IProductDoc extends Omit<IProduct, "_id">, mongoose.Document {}
 
 export const ProductSchemaFields: Record<keyof IProduct, any> = {
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     readonly: true,
-    required: true
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
@@ -59,18 +89,25 @@ export const ProductSchemaFields: Record<keyof IProduct, any> = {
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
   // Make reviews an array of references to the users that left a review.
   reviews: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        readonly: true
+    type: {
+      ids: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Review",
+          readonly: true,
+          required: true,
+        },
+      ],
+      value: {
+        type: Number,
+        required: true,
       },
-    ],
-    default: [],
+      default: { ids: 0, value: 0 },
+    },
   },
   is_in_stock: {
     type: Boolean,
@@ -80,17 +117,64 @@ export const ProductSchemaFields: Record<keyof IProduct, any> = {
   discount: {
     type: Number,
     default: 0,
-    required: true
+    required: true,
   },
   refurbished: {
     type: Boolean,
     default: false,
-    required: true
+    required: true,
   },
   type_sword: {
-    type: String,
+    type: Number,
+    enum: SwordType,
     required: true,
-    readonly: true,
+	readonly: true
+  },
+  description: {
+    type: [String],
+    required: true,
+	readonly: true
+  },
+  metal_type: {
+    type: Number,
+    enum: MetalType,
+    required: true,
+	readonly: true
+  },
+  total_length: {
+    type: Number,
+    required: true,
+	readonly: true
+  },
+  blade_length: {
+    type: Number,
+    required: true,
+	readonly: true
+  },
+  blade_width: {
+    type: Number,
+    required: true,
+	readonly: true
+  },
+  sword_weight: {
+    type: Number,
+    required: true,
+	readonly: true
+  },
+  point_of_balance: {
+    type: Number,
+    required: true,
+	readonly: true
+  },
+  sword_edge: {
+    type: Number,
+    enum: SwordEdge,
+    required: true,
+	readonly: true
+  },
+  engraving: {
+    type: Boolean,
+    required: true,
   },
 };
 const ProductSchema = new mongoose.Schema(ProductSchemaFields);

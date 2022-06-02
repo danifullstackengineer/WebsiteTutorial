@@ -10,6 +10,7 @@ const add_images_to_db = async (_: Request, res: Response): Promise<void> => {
         console.log("Saved product: ", i);
       });
     });
+	res.status(200).json("OK");
   } catch (err) {
     // Just throwing the errors since these are single use endpoints so no need to worry
     // about user experience.
