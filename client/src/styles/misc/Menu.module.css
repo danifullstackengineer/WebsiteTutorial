@@ -1,0 +1,41 @@
+.menu {
+  position: absolute;
+  width: 50rem;
+  right: 0;
+  top: 100%;
+  transform: translateX(100%);
+  transition: transform 150ms ease-in;
+}
+.menu__active {
+  transform: translateX(0);
+}
+.menu__option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.menu__option__title {
+  width: 100%;
+  font-size: 2.5rem;
+  font-family: "Dance";
+  letter-spacing: 0.5rem;
+  color: black;
+  text-align: center;
+  padding: 1rem 0 1rem 0;
+  cursor: pointer;
+}
+.menu__option:not(.menu__option__active):hover {
+  box-shadow: inset 0px 0px 50px 9px rgba(255, 0, 0, 0.37);
+}
+.menu__option__active {
+  background-color: black;
+}
+.menu__option__active .menu__option__title {
+  color: white;
+}
+@media screen and (max-width: 500px) {
+  .menu {
+    width: 35rem;
+  }
+}

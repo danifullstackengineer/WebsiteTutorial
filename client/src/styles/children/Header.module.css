@@ -1,0 +1,171 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  z-index: var(--header-z-index);
+  position: relative;
+}
+.header > div {
+  flex: 0.5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.title {
+  width: 100%;
+}
+.title > h1 {
+  font-size: 4rem;
+  margin: 2rem 0 2rem 0;
+  font-family: "Dragon";
+  text-align: center;
+  letter-spacing: 0.5rem;
+  color: rgb(255, 100, 100);
+  cursor: pointer;
+  text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a,
+    0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222,
+    0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a,
+    0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212,
+    0 22px 30px rgba(0, 0, 0, 0.9);
+}
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Lower Header Input */
+.options:nth-child(1) {
+  flex: 1;
+  margin: 1rem 0 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+.options:nth-child(1) input {
+  height: 100%;
+  width: 50%;
+  border: none;
+  min-height: 3rem;
+  font-size: 2rem;
+  font-family: "Dragon";
+  letter-spacing: 0.2rem;
+  padding: 0 1rem 0 1rem;
+}
+.options:nth-child(1) input::placeholder {
+  font-size: 1.5rem;
+}
+
+/* Lower Header Menu Button */
+.options:nth-child(2) {
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  transition: transform 150ms ease-in;
+}
+.options:not(.options__menu__opened, .options__dropdown__open) {
+  transform: rotate(0);
+}
+.options:nth-child(2) > img {
+  position: absolute;
+  width: 7.5rem;
+  height: 7.5rem;
+  bottom: 1.25rem;
+  right: 1.25rem;
+}
+.options:nth-child(3) {
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  left: 0;
+  bottom: 0;
+  cursor: pointer;
+  transition: transform 150ms ease-in;
+}
+.options__dropdown__btn {
+  position: absolute;
+  width: 7.5rem;
+  height: 7.5rem;
+  bottom: 1.25rem;
+  left: 1.25rem;
+}
+.options__menu__opened {
+  transform: rotate(180deg);
+}
+.options__dropdown__open {
+  transform: rotate(180deg);
+}
+/* Lower Header Dropdown */
+.dropdown {
+  position: absolute;
+  height: 50px;
+  bottom: -50px;
+  left: -100%;
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  transition: left 150ms ease-in;
+}
+.dropdown__active {
+  left: 0;
+}
+.dropdown button {
+  color: black;
+  cursor: pointer;
+  font-family: "Dragon";
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  letter-spacing: 0.25rem;
+  border: none;
+  font-size: 2rem;
+  height: 100%;
+  /* This is due to the fact that we have 7 btns => 100 / 7 */
+  width: 14.28%;
+}
+.dropdown button:not(.dropdown__active__btn) {
+  background-color: transparent;
+}
+.dropdown__active__btn {
+  background-color: chartreuse;
+}
+.dropdown button:not(.dropdown__active__btn):hover {
+  background-color: rgba(127, 255, 0, 0.3);
+}
+/* Page Responsiveness */
+@media screen and (max-width: 900px) {
+  .dropdown {
+    flex-direction: column;
+    width: 350px;
+    height: auto;
+    bottom: -350px;
+  }
+  .dropdown button {
+    height: 50px;
+    width: 100%;
+    text-align: left;
+    padding-left: 2rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .options:nth-child(2),
+  .options:nth-child(3) {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+  .options:nth-child(2) > img,
+  .options__dropdown__btn {
+    width: 5rem;
+    height: 5rem;
+  }
+  .dropdown {
+    width: 250px;
+  }
+}

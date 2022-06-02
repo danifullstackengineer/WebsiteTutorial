@@ -1,0 +1,50 @@
+/* Custom Font Faces */
+@font-face {
+  font-family: "Medieval";
+  src: url("../../public/assets/fonts/Medieval.woff2");
+}
+@font-face {
+  font-family: "Dragon";
+  src: url("../../public/assets/fonts/Dragon.woff2");
+}
+@font-face {
+  font-family: "Dance";
+  src: url("../../public/assets/fonts/Dancing.woff2");
+}
+/* Defined variables */
+:root {
+  /* Z-index */
+  --header-z-index: 100;
+}
+
+/* Some default settings throughout our app */
+html {
+  box-sizing: border-box;
+  /* Makes it so that 1rem = 10px */
+  font-size: 10px;
+}
+body {
+  /* Sets a minimum width and height for our application */
+  /* This means we don't care about screens less than */
+  /* 350x? or ?x350 or 350x350 */
+  min-width: 350px;
+  min-height: 350px;
+  overflow: auto;
+  background-color: white;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+a {
+	text-decoration: none;
+}
